@@ -65,4 +65,4 @@ script:
     fi
 
 after_success:
-  - codecov
+  - codecov --token=bbb0c3c7-541c-4279-b513-2c21981a4cda
