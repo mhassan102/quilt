@@ -48,7 +48,7 @@ install:
   # debug support
   - echo $(python --version)
   - pip install -U pip
-  - pip install -U numpy pytest
+  - pip install -U numpy pytest pytest-cov
   # install quilt from setup.py
   - travis_retry pip install --only-binary 'tables' ./compiler
   - |
@@ -58,8 +58,11 @@ install:
     fi
 
 script:
-  - pytest compiler
+  - pytest --cov=compiler compiler/quilt/test/
   - |
     if [[ "$TEST_REGISTRY" = true ]]; then
-      pytest ./registry
+      pytest --cov=registry registry/tests/
     fi
+
+after_success:
+  - codecov
